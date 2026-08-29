@@ -1,6 +1,6 @@
 [project]
-name = "FIXME"
-description = "FIXME"
+name = "tinyecs.compsys.dynamics"
+description = "Dynamics component and system library for tinyecs"
 version = "0.0.1"
 readme = "README.rst"
 
@@ -18,7 +18,12 @@ classifiers = [
 license = "MIT"
 license-files = ["LICENSE"]
 
-dependencies = [ ]
+dependencies = [
+    'aenum',
+    'pyglm',
+    'pgcooldown',
+    'tinyecs',
+]
 
 [dependency-groups]
 docs = [
@@ -29,12 +34,9 @@ docs = [
     "furo",
 ]
 
-[project.scripts]
-FIXME = "FIXME.__main__:main"
-
 [project.urls]
-homepage = "https://github.com/dickerdackel/FIXME"
-bugtracker = "https://github.com/DickerDackel/FIXME/issues"
+homepage = "https://github.com/dickerdackel/tinyecs-compsys/dynamics"
+bugtracker = "https://github.com/DickerDackel/tinyecs-compsys/dynamics/issues"
 
 [build-system]
 requires = ["setuptools"]
