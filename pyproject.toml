@@ -1,0 +1,44 @@
+[project]
+name = "FIXME"
+description = "FIXME"
+version = "0.0.1"
+readme = "README.rst"
+
+authors = [
+    { name="Michael Lamertz", email="michael.lamertz@gmail.com" }
+]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Games/Entertainment",
+    "Topic :: Software Development :: Libraries :: pygame",
+]
+
+license = "MIT"
+license-files = ["LICENSE"]
+
+dependencies = [ ]
+
+[dependency-groups]
+docs = [
+    "build",
+    "setuptools",
+    "sphinx",
+    "sphinx-autobuild",
+    "furo",
+]
+
+[project.scripts]
+FIXME = "FIXME.__main__:main"
+
+[project.urls]
+homepage = "https://github.com/dickerdackel/FIXME"
+bugtracker = "https://github.com/DickerDackel/FIXME/issues"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true

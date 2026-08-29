@@ -1,0 +1,6 @@
+build
+setuptools
+sphinx
+myst-parser
+furo
+tinyecs

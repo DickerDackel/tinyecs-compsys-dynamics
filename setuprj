@@ -1,0 +1,103 @@
+#!/usr/bin/env python3
+
+"""Setup a new python project from the template.
+
+This script gets a project name on the command line, then...
+
+    * Requires `uv` to run and terminates if it's not available
+    * Terminates if the given project directory already exists
+    * Recursively copies the template directory to a directory with the given name
+    * Replaces all `FIXME` tags in the project tree with the given name
+    * Initializes a venv using `uv`
+    * Installs a requirements.txt to setup a working environment
+    * Installs the sphinx requirements from the docs directory
+    * Does an editable install of the new project in its own venv
+
+"""
+
+import argparse
+import os
+import shutil
+import subprocess
+import sys
+
+from pathlib import Path
+
+cmdline = argparse.ArgumentParser(
+    description='Setup a new python project from the template',
+    epilog='\n'.join(__doc__.split('\n')[2:]),
+    formatter_class=argparse.RawDescriptionHelpFormatter
+)
+cmdline.add_argument('-t', '--template', type=Path, default=Path('~/Projects/template-python'), help='Alternative template directory')
+cmdline.add_argument('-p', '--project-root', type=Path, default=Path('.'), help='Alternative project root')
+cmdline.add_argument('-r', '--requirements', type=Path, default=Path('~/Projects/requirements.txt'), help='Alternative path to requirements.txt')
+cmdline.add_argument('name', type=str, help='The name of the new project')
+opts = cmdline.parse_args(sys.argv[1:])
+
+opts.template = opts.template.expanduser()
+opts.project_root = opts.project_root.expanduser()
+
+if not shutil.which('uv'):
+    raise SystemExit('`uv` must be installed')
+
+requirements = opts.requirements.expanduser()
+if not requirements.exists():
+    raise SystemExit(f'Requirements file {requirements} does not exist')
+
+source = opts.template.expanduser()
+if not source.exists():
+    raise SystemExit(f'Template {source} does not exist')
+
+dest = opts.project_root.expanduser() / opts.name
+if dest.exists():
+    raise SystemExit(f'Project directory {dest} already exists')
+
+print(f'mkdir {dest}')
+dest.mkdir()
+
+variables = {
+    'project': opts.name,
+}
+
+for root, dirs, files in source.walk():
+    try:
+        dirs.remove('.git')
+        dirs.remove('.venv')
+    except ValueError:
+        pass
+
+    for dname in dirs:
+        relative = (root / dname).relative_to(source)
+        print(f'mkdir {dest / relative}')
+        (dest / relative).mkdir()
+
+    for fname in files:
+        relative = (root / fname).relative_to(source)
+        with open(source / relative) as f:
+            template = f.read().replace('FIXME', opts.name)
+
+        print(f'copy {dest / relative}')
+        with open(dest / relative, 'w') as f:
+            print(template, file=f)
+
+(dest / 'src' / opts.name).mkdir()
+(dest / 'src' / opts.name / '__init__.py').touch()
+
+with open((dest / 'src' / opts.name / '__main__.py'), 'w') as f:
+    print("""#!/bin/env python3
+
+def main():
+    print('Hello, world')
+    ...
+
+
+if __name__ == "__main__":
+    main()
+""", file=f)
+
+oldcwd = os.getcwd
+os.chdir(dest)
+subprocess.run( 'uv venv'.split())
+subprocess.run(f'uv pip install -r {requirements}'.split())
+subprocess.run( 'uv pip install -r docs/requirements.txt'.split())
+subprocess.run( 'uv pip install -e .'.split())
