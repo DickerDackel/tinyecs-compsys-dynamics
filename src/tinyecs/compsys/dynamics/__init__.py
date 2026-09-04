@@ -119,10 +119,9 @@ def _angle_of(v: vec2) -> float:
     return glm.degrees(glm.atan2(v.y, v.x))
 
 
-def sys_aim_at(dt: float, eid: EntityID, prsa: PRSA, aim_at: EntityID) -> None:
+def sys_aim_at(eid: EntityID, prsa: PRSA, aim_at: EntityID) -> None:
     """Update prsa.rotation to point towards the target.
 
-    :param dt: Delta time
     :param eid: The entity ID
     :param prsa: The PRSA transform object of the entity
 
@@ -133,10 +132,9 @@ def sys_aim_at(dt: float, eid: EntityID, prsa: PRSA, aim_at: EntityID) -> None:
     prsa.rotation = _angle_of(delta)
 
 
-def sys_align_momentum(dt: float, eid: EntityID, prsa: PRSA, momentum: vec2, align_momentum: bool):
+def sys_align_momentum(eid: EntityID, prsa: PRSA, momentum: vec2, align_momentum: bool):
     """Align the entity with its own momentum.
 
-    :param dt: Delta time
     :param eid: The entity ID
 
     """
@@ -146,10 +144,9 @@ def sys_align_momentum(dt: float, eid: EntityID, prsa: PRSA, momentum: vec2, ali
     prsa.rotation = _angle_of(momentum)
 
 
-def sys_align_with(dt: float, eid: EntityID, prsa: PRSA, align_with: EntityID) -> None:
+def sys_align_with(eid: EntityID, prsa: PRSA, align_with: EntityID) -> None:
     """Align rotation with rotation of parent.
 
-    :param dt: Delta time
     :param eid: The entity ID
 
     """
@@ -158,10 +155,9 @@ def sys_align_with(dt: float, eid: EntityID, prsa: PRSA, align_with: EntityID) -
     prsa.rotation = pprsa.rotation
 
 
-def sys_anchor(dt: float, eid: EntityID, prsa: PRSA, anchor: Anchor) -> None:
+def sys_anchor(eid: EntityID, prsa: PRSA, anchor: Anchor) -> None:
     """Position the entity relative to its parent.
 
-    :param dt: Delta time
     :param eid: The entity ID
 
     """
@@ -172,13 +168,13 @@ def sys_anchor(dt: float, eid: EntityID, prsa: PRSA, anchor: Anchor) -> None:
     prsa.pos = pprsa.pos + real_offset
 
 
-def sys_friction(dt: float, eid: EntityID, momentum: vec2, friction: float) -> None:
+def sys_friction(eid: EntityID, momentum: vec2, friction: float, *, dt: float) -> None:
     """Apply friction to the momentum.
 
-    :param dt: Delta time
     :param eid: The entity ID
     :param eid: The momentum of the entity
     :param friction: The friction to apply
+    :param dt: Deltatime
 
     FIXME implementation undecided
     """
@@ -190,24 +186,23 @@ def sys_friction(dt: float, eid: EntityID, momentum: vec2, friction: float) -> N
     momentum *= reduce
 
 
-def sys_gravity(dt: float, eid: EntityID, momentum: vec2, gravity: vec2) -> None:
+def sys_gravity(eid: EntityID, momentum: vec2, gravity: vec2, *, dt: float) -> None:
     """Apply gavity to both momentum and position.
 
-    :param dt: Delta time
     :param eid: The entity ID
     :param prsa: The PRSA transform object of the entity
     :param momentum: The momentum of the entity
     :param gravity: The world gravity to apply
+    :param dt: Delta time
 
     """
 
     momentum += gravity * dt
 
 
-def sys_lerp_alpha(dt: float, eid: EntityID, lerp: LerpThing, prsa: PRSA) -> None:
+def sys_lerp_alpha(eid: EntityID, lerp: LerpThing, prsa: PRSA) -> None:
     """Lerp the alpha of the entity.
 
-    :param dt: Delta time
     :param eid: The entity ID
     :param lerp: A `pgcooldown.LerpThing` for the alpha change.
 
@@ -218,10 +213,9 @@ def sys_lerp_alpha(dt: float, eid: EntityID, lerp: LerpThing, prsa: PRSA) -> Non
         ecs.remove_component(Comp.LERP_ALPHA)
 
 
-def sys_lerp_angle(dt: float, eid: EntityID, lerp: LerpThing, prsa: PRSA) -> None:
+def sys_lerp_angle(eid: EntityID, lerp: LerpThing, prsa: PRSA) -> None:
     """Lerp the orientation of the entity.
 
-    :param dt: Delta time
     :param eid: The entity ID
     :param lerp: A `pgcooldown.LerpThing` for the rotation change.
 
@@ -232,10 +226,9 @@ def sys_lerp_angle(dt: float, eid: EntityID, lerp: LerpThing, prsa: PRSA) -> Non
         ecs.remove_component(Comp.LERP_ANGLE)
 
 
-def sys_lerp_momentum(dt: float, eid: EntityID, lerp: LerpThing, momentum: vec2) -> None:
+def sys_lerp_momentum(eid: EntityID, lerp: LerpThing, momentum: vec2) -> None:
     """Lerp the scale of the entity.
 
-    :param dt: Delta time
     :param eid: The entity ID
     :param lerp: A `pgcooldown.LerpThing` for the momentum change.
 
@@ -246,10 +239,9 @@ def sys_lerp_momentum(dt: float, eid: EntityID, lerp: LerpThing, momentum: vec2)
         ecs.remove_component(Comp.LERP_MOMENTUM)
 
 
-def sys_lerp_pos(dt: float, eid: EntityID, prsa: PRSA, lerp: LerpPosition):
+def sys_lerp_pos(eid: EntityID, prsa: PRSA, lerp: LerpPosition):
     """Update position based on a LerpPosition object.
 
-    :param dt: Delta time
     :param eid: The entity ID
     :param prsa: The PRSA transform object of the entity
     :param lerp: The ``LerpPosition`` object tracking the distance
@@ -263,10 +255,9 @@ def sys_lerp_pos(dt: float, eid: EntityID, prsa: PRSA, lerp: LerpPosition):
         ecs.remove_component(eid, Comp.LERP_POSITION)
 
 
-def sys_lerp_scale(dt: float, eid: EntityID, lerp: LerpThing, prsa: PRSA) -> None:
+def sys_lerp_scale(eid: EntityID, lerp: LerpThing, prsa: PRSA) -> None:
     """Lerp the scale of the entity.
 
-    :param dt: Delta time
     :param eid: The entity ID
     :param lerp: A `pgcooldown.LerpThing` for the scale change.
 
@@ -277,23 +268,22 @@ def sys_lerp_scale(dt: float, eid: EntityID, lerp: LerpThing, prsa: PRSA) -> Non
         ecs.remove_component(Comp.LERP_SCALE)
 
 
-def sys_momentum(dt: float, eid: EntityID, prsa: PRSA, momentum: vec2) -> None:
+def sys_momentum(eid: EntityID, prsa: PRSA, momentum: vec2, *, dt: float) -> None:
     """Apply momentum to the PRSA.
 
-    :param dt: Delta time
     :param eid: The entity ID
     :param prsa: The PRSA transform object of the entity
     :param momentum: The momentum of the entity
+    :param dt: Delta time
 
     """
 
     prsa.pos += momentum * dt
 
 
-def sys_track_direct(dt: float, eid: EntityID, prsa: PRSA, momentum: vec2, target: TrackDirect) -> None:
+def sys_track_direct(eid: EntityID, prsa: PRSA, momentum: vec2, target: TrackDirect) -> None:
     """Track another target, make the momentum point directly towards it.
 
-    :param dt: Delta time
     :param eid: The entity ID
     :param prsa: The PRSA transform object of the entity
     :param momentum: The momentum of the entity
@@ -314,14 +304,14 @@ def sys_track_direct(dt: float, eid: EntityID, prsa: PRSA, momentum: vec2, targe
     momentum.xy = direction.xy
 
 
-def sys_track_prop_nav(dt: float, eid: EntityID, prop_nav: TrackPropNav, prsa: PRSA, momentum: vec2):
+def sys_track_prop_nav(eid: EntityID, prop_nav: TrackPropNav, prsa: PRSA, momentum: vec2, *, dt: float):
     """Make the entity track another entity by proportional navigation.
 
-    :param dt: Delta time
     :param eid: The entity ID
     :param prop_nav: The configuration object for the targetting
     :param prsa: The PRSA transform object of the entity
     :param momentum: The momentum of the entity
+    :param dt: Delta time
 
     """
 
