@@ -239,7 +239,7 @@ def sys_lerp_momentum(eid: EntityID, lerp: LerpThing, momentum: vec2) -> None:
         ecs.remove_component(Comp.LERP_MOMENTUM)
 
 
-def sys_lerp_pos(eid: EntityID, prsa: PRSA, lerp: LerpPosition):
+def sys_lerp_position(eid: EntityID, prsa: PRSA, lerp: LerpPosition):
     """Update position based on a LerpPosition object.
 
     :param eid: The entity ID
