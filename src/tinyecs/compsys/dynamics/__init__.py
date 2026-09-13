@@ -23,7 +23,7 @@ extend_enum(Comp, 'LERP_POSITION')
 extend_enum(Comp, 'LERP_SCALE')
 extend_enum(Comp, 'MOMENTUM')
 extend_enum(Comp, 'PRSA')
-extend_enum(Comp, 'TRACK_HOMING')
+extend_enum(Comp, 'TRACK_PROPNAV')
 extend_enum(Comp, 'TRACK_DIRECT')
 
 
@@ -304,13 +304,13 @@ def sys_track_direct(eid: EntityID, prsa: PRSA, momentum: vec2, target: TrackDir
     momentum.xy = direction.xy
 
 
-def sys_track_prop_nav(eid: EntityID, prop_nav: TrackPropNav, prsa: PRSA, momentum: vec2, *, dt: float):
+def sys_track_propnav(eid: EntityID, prsa: PRSA, momentum: vec2, prop_nav: TrackPropNav, *, dt: float):
     """Make the entity track another entity by proportional navigation.
 
     :param eid: The entity ID
-    :param prop_nav: The configuration object for the targetting
     :param prsa: The PRSA transform object of the entity
     :param momentum: The momentum of the entity
+    :param prop_nav: The configuration object for the targetting
     :param dt: Delta time
 
     """
