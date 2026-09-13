@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'FIXME'
+project = 'tinyecs-compsys-dynamics'
 copyright = '2026, Michael "Dicker Dackel" Lamertz'
 author = 'Michael "Dicker Dackel" Lamertz'
 release = '0.0.1'
@@ -31,7 +31,8 @@ html_theme = 'furo'
 html_static_path = ['_static']
 html_theme_options = {
     "navigation_with_keys": True,
-    "source_repository": "https://github.com/dickerdackel/patternengine",
+    "source_view_link": "https://forgejo.indieandmore.photography/dickerdackel/tinyecs-compsys-dynamics/src/branch/main/src/{filename}",
+    "source_edit_link": "https://forgejo.indieandmore.photography/dickerdackel/tinyecs-compsys-dynamics/_edit/main/src/{filename}",
     "source_branch": "main",
     "source_directory": "docs/source",
     "dark_css_variables": {

@@ -1,12 +1,11 @@
-FIXME - Long description of FIXME
-=================================
+tinyecs-compsys-dynamics - Dynamics Components and Systems
+==========================================================
 
 .. toctree::
    :caption: Contents:
 
    introduction
    api
-   glossary
    license
 
 Index
