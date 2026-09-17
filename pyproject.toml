@@ -22,16 +22,7 @@ dependencies = [
     'aenum',
     'pyglm',
     'pgcooldown',
-    'tinyecs',
-]
-
-[dependency-groups]
-docs = [
-    "build",
-    "setuptools",
-    "sphinx",
-    "sphinx-autobuild",
-    "furo",
+    'tinyecs-compsys @ git+https://forgejo.indieandmore.photography/dickerdackel/tinyecs-compsys',
 ]
 
 [project.urls]
