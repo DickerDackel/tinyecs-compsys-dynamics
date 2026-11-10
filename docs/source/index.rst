@@ -6,6 +6,7 @@ tinyecs-compsys-dynamics - Dynamics Components and Systems
 
    introduction
    api
+   ai-policy
    license
 
 Index

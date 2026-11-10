@@ -13,8 +13,8 @@ Synopsis
 Usage
 -----
 
-This package has no direct functionality, but all sub modules will register
-their component IDs in the ``tinyecs.compsys.Comp`` enum.
+This package contains platform independent components and systems regarding
+entity dynamics.
 
 Installation
 ------------
@@ -24,7 +24,7 @@ pyproject.toml)
 
 .. code:: console
 
-   pip install tinyecs-compsys[dynamics]
+   pip install tinyecs[dynamics]
    # or
    pip install tinyecs
    pip install tinyecs-compsys
@@ -36,8 +36,6 @@ Support / Contributing
 Issues can be opened on `github issues`_
 
 .. _github issues: https://forgejo.indieandmore.photography/dickerdackel/tinyecs-compsys/issues
-
-.. include:: AI-policy.rst
 
 
 License

@@ -1,5 +1,5 @@
 [project]
-name = "tinyecs.compsys.dynamics"
+name = "tinyecs-compsys-dynamics"
 description = "Dynamics component and system library for tinyecs"
 version = "0.0.1"
 readme = "README.rst"
@@ -22,7 +22,7 @@ dependencies = [
     'aenum',
     'pyglm',
     'pgcooldown',
-    'tinyecs-compsys @ git+https://forgejo.indieandmore.photography/dickerdackel/tinyecs-compsys',
+    'tinyecs-compsys',
 ]
 
 [project.urls]
