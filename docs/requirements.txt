@@ -3,6 +3,3 @@ setuptools
 sphinx
 furo
 sphinx-autobuild
-tinyecs-compsys
-pgcooldown
-aenum

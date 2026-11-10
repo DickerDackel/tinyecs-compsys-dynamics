@@ -7,7 +7,7 @@ tinyecs-compsys-dynamics API
 Components
 ----------
 
-Registers the following CIDs to ``tinyecs.compsy.Comp``:
+Registers the following CIDs to ``tinyecs.compsys.Comp``:
 
 * AIM_AT
 * ALIGN_MOMENTUM
@@ -21,8 +21,8 @@ Registers the following CIDs to ``tinyecs.compsy.Comp``:
 * LERP_SCALE
 * MOMENTUM
 * PRSA
-* TRACK_HOMING
 * TRACK_DIRECT
+* TRACK_PROPNAV
 
 .. autoclass:: tinyecs.compsys.dynamics.Anchor
    :members:

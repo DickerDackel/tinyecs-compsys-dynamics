@@ -24,11 +24,12 @@ dependencies = [
     'pyglm',
     'tinyecs >= 0.5.0',
     'tinyecs-compsys',
+    'tinyecs-compsys-base',
 ]
 
 [project.urls]
-homepage = "https://github.com/dickerdackel/tinyecs-compsys/dynamics"
-bugtracker = "https://github.com/DickerDackel/tinyecs-compsys/dynamics/issues"
+homepage = "https://github.com/dickerdackel/tinyecs-compsys-dynamics"
+bugtracker = "https://github.com/DickerDackel/tinyecs-compsys-dynamics/issues"
 
 [build-system]
 requires = ["setuptools"]

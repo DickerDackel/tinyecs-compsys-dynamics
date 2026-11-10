@@ -6,12 +6,6 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-import sys
-
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
-
 project = 'tinyecs-compsys-dynamics'
 copyright = '2026, Michael "Dicker Dackel" Lamertz'
 author = 'Michael "Dicker Dackel" Lamertz'
@@ -37,8 +31,7 @@ html_theme = 'furo'
 html_static_path = ['_static']
 html_theme_options = {
     "navigation_with_keys": True,
-    "source_view_link": "https://forgejo.indieandmore.photography/dickerdackel/tinyecs-compsys-dynamics/src/branch/main/src/{filename}",
-    "source_edit_link": "https://forgejo.indieandmore.photography/dickerdackel/tinyecs-compsys-dynamics/_edit/main/src/{filename}",
+    "source_repository": "https://github.com/dickerdackel/tinyecs-compsys-dynamics/",
     "source_branch": "main",
     "source_directory": "docs/source",
     "dark_css_variables": {
