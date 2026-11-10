@@ -20,8 +20,9 @@ license-files = ["LICENSE"]
 
 dependencies = [
     'aenum',
-    'pyglm',
     'pgcooldown',
+    'pyglm',
+    'tinyecs >= 0.5.0',
     'tinyecs-compsys',
 ]
 
