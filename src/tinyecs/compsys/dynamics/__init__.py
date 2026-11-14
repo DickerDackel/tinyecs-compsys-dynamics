@@ -357,3 +357,10 @@ def sys_track_propnav(eid: EntityID, prsa: PRSA, momentum: vec2, track: TrackPro
     rad = glm.radians(rotation)
     new_momentum = glm.rotate(momentum, copysign(rad, delta_phi))
     momentum.xy = new_momentum.xy
+
+
+__all__ = ['Anchor', 'LerpPosition', 'PRSA', 'TrackDirect', 'TrackPropNav',
+           'sys_aim_at', 'sys_align_momentum', 'sys_align_with', 'sys_anchor',
+           'sys_friction', 'sys_gravity', 'sys_lerp_alpha', 'sys_lerp_angle',
+           'sys_lerp_momentum', 'sys_lerp_position', 'sys_lerp_scale',
+           'sys_momentum', 'sys_track_direct', 'sys_track_propnav']
