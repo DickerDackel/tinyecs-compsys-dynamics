@@ -56,7 +56,27 @@ class LerpPosition:
 
 
 class PRSA:
-    """Rotation, Scale, Alpha, Position in one container"""
+    """Rotation, Scale, Alpha, Position in one container
+
+    :param pos: Position vector
+    :param rotation: rotation angle
+    :param scale: scaling factor
+    :param alpha: transparency value
+
+    The PRSA is unit agnostic. It just holds the most common values to
+    transfer an object.  The units these values represent are a decision of
+    the developer, the game world, and the systems that make use of these
+    values.
+
+    There's an additional ``offset`` value, a ``glm.vec2`` which can be used
+    by components that apply e.g. jitter to a position.
+
+    If multiple systems make use of ``offset``, they should add to it instead
+    of overwriting any existing value.  In that case, use
+    ``sys_reset_prsa_offset`` to set it to zero at the beginning of the frame.
+
+    """
+
     pos: vec2
     rotation: float
     scale: float
@@ -67,6 +87,7 @@ class PRSA:
         self.rotation = rotation
         self.scale = scale
         self.alpha = alpha
+        self.offset = vec2()
 
     def __iter__(self) -> Iterator[object]:
         yield self.pos
@@ -294,6 +315,15 @@ def sys_momentum(eid: EntityID, prsa: PRSA, momentum: vec2, *, dt: float) -> Non
     prsa.pos += momentum * dt
 
 
+def sys_reset_prsa_offset(eid, prsa):
+    """Reset the prsa.offset attribute at the start of a frame
+
+    :param prsa: The PRSA transform object of the entity
+    """
+
+    prsa.offset = vec2()
+
+
 def sys_track_direct(eid: EntityID, prsa: PRSA, momentum: vec2, track: TrackDirect) -> None:
     """Track another target, make the momentum point directly towards it.
 
@@ -363,4 +393,5 @@ __all__ = ['Anchor', 'LerpPosition', 'PRSA', 'TrackDirect', 'TrackPropNav',
            'sys_aim_at', 'sys_align_momentum', 'sys_align_with', 'sys_anchor',
            'sys_friction', 'sys_gravity', 'sys_lerp_alpha', 'sys_lerp_angle',
            'sys_lerp_momentum', 'sys_lerp_position', 'sys_lerp_scale',
-           'sys_momentum', 'sys_track_direct', 'sys_track_propnav']
+           'sys_momentum', 'sys_reset_prsa_offset', 'sys_track_direct',
+           'sys_track_propnav']
